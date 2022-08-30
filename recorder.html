@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Online Recorder</title>
+	<link rel="stylesheet" href="./recorder.css">
+</head>
+<body>
+	<div class="screen-recorder-container" id="onlineScreenBox">
+		<div class="wrapper">
+			<div class="title" id="recordOnlineTitle">免费在线录屏</div>
+			<div class="record-settings" id="recordSetting">
+				<div class="record-medias">
+					<div class="media-item screen active" id="trigger-screen">
+						<div class="item-img"></div>
+						<div class="item-name">屏幕</div>
+						<div class="checked"></div>
+					</div>
+					<div class="media-item camera" id="trigger-camera">
+						<div class="item-img"></div>
+						<div class="item-name">摄像头</div>
+						<div class="checked"></div>
+					</div>
+					<div class="media-item sound" id="trigger-sound">
+						<div class="item-img"></div>
+						<div class="item-name">系统声音</div>
+						<div class="checked"></div>
+					</div>
+					<div class="media-item mic" id="trigger-microphone">
+						<div class="item-img"></div>
+						<div class="item-name">麦克风</div>
+						<div class="checked"></div>
+					</div>
+				</div>
+				<button class="record-btn record-start btn-common" id="start-record"><div class="start-icon"></div>开始录制</button>
+			</div>
+			<div class="record-recording" id="recordCounting">
+				<div class="back-to-setting" id="goBackTitle">返回设置</div>
+				<div class="recording-block">
+					<div class="recording-left">
+						<div class="recording-img">正在录制中...</div>
+						<div class="recording-right">
+							<div class="count-down-num" id="recordedTime">00:00:00</div>
+							<div class="record-control-btns">
+								<div class="pause-or-resume">
+									<button class="record-btn record-pause" disabled id="pause-record">
+									</button>
+									<div class="pause-resume-word pause">暂停录制</div>
+									<div class="pause-resume-word resume">恢复录制</div>
+								</div>
+								<div class="end-record">
+									<button class="record-btn record-end" disabled id="stop-record">
+									</button>
+									<div class="pause-resume-word">停止录制</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="choosed-medias">
+						<div class="item-camera" id="chooseCamera"></div>
+						<div class="item-audio" id="chooseAudio"></div>
+						<div class="item-mic" id="chooseMic"></div>
+					</div>
+				</div>
+			</div>
+			<div class="record-preview" id="recordPreview">
+				<div class="back-to-setting" id="recordNewTitle">开始新的录制</div>
+				<div class="preivew-record-video-box">
+					<video id="preview-video" playsinline preload></video>
+				</div>
+				<div class="deal-video">
+					<div class="get-record-video">
+						<div class="download-record-video btn-common" id="downloadRecordVideo"><div class="down-icon"></div> 保存到本地</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<video id="camera-video" autopictureinpicture playsinline autoplay loop></video>
+		<div id="goBackDialog" class="go-back-dialog tip-dialog-common">
+			<div class="go-back-content dialog-content-common">
+				<div class="go-back-icon"></div>
+				<div class="go-back-title">当前正在录制中，返回将停止录制，且录制内容不会保存</div>
+				<div class="go-back-btns">
+					<div class="go-back-btn confirm-go-back btn-common" id="confirmBack">停止录制</div>
+					<div class="go-back-btn cancel-go-back btn-common" id="cancelBack">继续录制</div>
+				</div>
+			</div>
+		</div>
+		<div class="no-camera-tip no-device-tip tip-dialog-common" id="noCameraTip">
+			<div class="no-device-content dialog-content-common">
+				<div class="no-device-icon"></div>
+				<div class="no-device-title">未识别到系统摄像头设备，无法录制摄像头画面</div>
+				<div class="sure-btn btn-common" id="closeCameraTip">确定</div>
+			</div>
+		</div>
+		<div class="no-mic-tip no-device-tip tip-dialog-common" id="noMicTip">
+			<div class="no-device-content dialog-content-common">
+				<div class="no-device-icon"></div>
+				<div class="no-device-title">未识别到系统声音输入设备，无法使用麦克风录制声音</div>
+				<div class="sure-btn btn-common" id="closeMicTip">确定</div>
+			</div>
+		</div>
+		<div class="get-app-dialog tip-dialog-common" id="getAppTip">
+			<div class="get-app-content dialog-content-common">
+				<div class="close" id="closeGetAppDialogIcon"></div>
+				<div class="app-tip-img"></div>
+				<div class="app-tip-content" id="macAudioNotSupport">Mac系统暂不支持网页录制系统声音</div>
+				<div class="app-tip-content" id="noDisplayMedia">您当前浏览器不支持在线录屏，建议更换Chrome浏览器</div>
+			</div>
+		</div>
+		<div class="not-allowed-tip tip-dialog-common" id="notAllowedTip">
+			<div class="not-allowed-content dialog-content-common">
+				<div class="not-allowed-title">未获取到系统权限，可在导航栏打开对应权限</div>
+				<div class="not-allowed-img">
+					<div class="click-here-plz">点击此处授权呀:)</div>
+				</div>
+				<div class="just-chrome">图示以Chrome浏览器为例</div>
+				<div class="btn-common for-sure" id="hideNotAllowedTip">确定</div>
+			</div>
+		</div>
+		<div class="light-top-tip">
+			<div class="tip-img"></div>
+			<div class="tip-word">没有开启屏幕录制权限，请确定后重试！</div>
+		</div>
+		<div class="tip-dialog-common count-down-dialog" id="countdownBox">
+			<div class="count-down">
+				<div class="count-circle"></div>
+				<div class="countdown-number" id="countdownNum">3</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="recorder.js"></script>
+	<script src="fix-webm-duration.js"></script>
+</body>
+</html>

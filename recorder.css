@@ -1,0 +1,692 @@
+:root {
+	--mainColor: #1FB5C9;
+	--mainColor-hover: #1FAAC9;
+	--mainText: #022125;
+	--common-box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.3);
+	--light-blue-bg: #F8F9FB;
+}
+@font-face {
+	font-family: 'digital Display';
+	src: url("./img/digital-display.woff2");
+}
+@font-face {
+	font-family: 'digital-display';
+	src: url("./img/digital_display.woff2");
+}
+html, body {
+	height: 100%;
+}
+.screen-recorder-container {
+	width: 100%;
+	height: 100%;
+	background: #F5F5F5 url("./img/bg.svg") left bottom no-repeat;
+	background-size: auto 260px;
+	background-position: 0 calc(100% + 70px);
+	font-family: opensans, Avenir;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.screen-recorder-container.preivew-main-box {
+	height: auto;
+	min-height: calc(100% - 50px);
+	padding: 20px 0 50px;
+}
+.screen-recorder-container .wrapper {
+	width: 1200px;
+	margin: 0 auto;
+	max-width: 80%;
+}
+.screen-recorder-container .wrapper .title {
+	width: max-content;
+	margin: 0 auto;
+	font-size: 36px;
+	line-height: 44px;
+	color: #000000;
+	font-weight: bold;
+	text-align: center;
+}
+.screen-recorder-container .wrapper .record-medias {
+	margin-top: 66px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.screen-recorder-container .wrapper .record-medias .media-item {
+	width: 200px;
+	height: 200px;
+	position: relative;
+	border-radius: 36px;
+	padding: 0 20px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: #FFFFFF;
+	transition: all .3s ease;
+	border: 3px solid transparent;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.active {
+	opacity: 1;
+	box-shadow: 0px 20px 40px rgba(16, 104, 116, 0.1);
+}
+.screen-recorder-container .wrapper .record-medias .media-item .checked {
+	width: 24px;
+	height: 24px;
+	background-color: #F8FEFF;
+	border: 2px solid rgba(2, 33, 37, 0.2);
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	border-radius: 50%;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.active .checked {
+	border: none;
+	background-color: var(--mainColor);
+	background-image: url("./img/checked.svg");
+	background-size: 12px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.screen-recorder-container .wrapper .record-medias .media-item .item-img {
+	width: 50px;
+	height: 50px;
+	opacity: 0.5;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.screen .item-img {
+	background: url("./img/screen.svg") center no-repeat;
+	background-size: 40px 40px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.camera .item-img {
+	background: url("./img/camera.svg") center no-repeat;
+	background-size: 35px 44px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.sound .item-img {
+	background: url("./img/sound.svg") center no-repeat;
+	background-size: 41px 36px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.mic .item-img {
+	background: url("./img/mic.svg") center no-repeat;
+	background-size: 30px 48px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item:hover {
+	background: rgba(31, 181, 201, 0.05);
+	border-color: var(--mainColor);
+}
+.screen-recorder-container .wrapper .record-medias .media-item.active .item-img, .screen-recorder-container .wrapper .record-medias .media-item.active .item-name, .screen-recorder-container .wrapper .record-medias .media-item:hover .item-img, .screen-recorder-container .wrapper .record-medias .media-item:hover .item-name {
+	opacity: 1;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.screen:hover .item-img {
+	background: url("./img/screen-hover.svg") center no-repeat;
+	background-size: 40px 40px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.camera:hover .item-img {
+	background: url("./img/camera-hover.svg") center no-repeat;
+	background-size: 35px 44px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.sound:hover .item-img {
+	background: url("./img/sound-hover.svg") center no-repeat;
+	background-size: 41px 36px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item.mic:hover .item-img {
+	background: url("./img/mic-hover.svg") center no-repeat;
+	background-size: 30px 48px;
+}
+.screen-recorder-container .wrapper .record-medias .media-item:hover .item-name {
+	color: var(--mainColor);
+}
+.screen-recorder-container .wrapper .record-medias .media-item .item-name {
+	margin-top: 20px;
+	font-size: 18px;
+	line-height: 22px;
+	text-align: center;
+	color: var(--mainText);
+	opacity: 0.5;
+}
+.screen-recorder-container .wrapper .record-btn.record-start {
+	margin: 56px auto 0;
+	padding: 0 70px;
+	font-weight: 600;
+	font-size: 24px;
+}
+.screen-recorder-container .btn-common {
+	width: max-content;
+	min-width: 200px;
+	height: 64px;
+	border: none;
+	font-size: 22px;
+	padding: 0 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--mainColor);
+	border: none;
+	box-shadow: 0px 20px 40px rgba(16, 104, 116, 0.2);
+	border-radius: 34px;
+	cursor: pointer;
+	color: #fff;
+	transition: all .3s ease;
+}
+.screen-recorder-container .btn-common a, .screen-recorder-container a {
+	text-decoration: none;
+}
+.screen-recorder-container .btn-common:hover {
+	background: var(--mainColor-hover);
+	box-shadow: none;
+	transform: translateY(4px);
+}
+.screen-recorder-container .wrapper .record-btn.record-start .start-icon {
+	width: 26px;
+	height: 26px;
+	margin-right: 12px;
+	background: url("./img/start.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-control-btns {
+	display: flex;
+	justify-content: space-evenly;
+}
+.screen-recorder-container .wrapper .record-control-btns .pause-resume-word {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: center;
+	color: var(--mainText);
+	margin-top: 6px;
+}
+.screen-recorder-container .wrapper .record-control-btns .record-btn {
+	width: 65px;
+	height: 65px;
+	display: block;
+	box-shadow: 0px 20px 40px rgba(16, 104, 116, 0.2);
+	border-radius: 50%;
+	margin: 30px auto 0;
+	border: none;
+	background-color: var(--mainColor);
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: box-shadow .3s ease, transform .3s ease;
+}
+
+.screen-recorder-container .wrapper .record-btn.record-stop {
+	width: 65px;
+	height: 65px;
+	box-shadow: 0px 20px 40px rgba(16, 104, 116, 0.2);
+	border-radius: 32px;
+	margin: 30px auto 0;
+	border: none;
+	background-color: var(--mainColor);
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: box-shadow .3s ease, transform .3s ease;
+}
+.screen-recorder-container .wrapper .record-btn.record-pause {
+	background-image: url("./img/stop.svg");
+	background-size: 20px 26px;
+}
+.screen-recorder-container .wrapper .record-btn.record-resume {
+	background-image: url("./img/resume.svg");
+	background-size: 24px 26px;
+}
+
+.screen-recorder-container .wrapper .record-btn.record-end {
+	background-image: url("./img/end.svg");
+	background-size: 26px 26px;
+}
+.screen-recorder-container .wrapper .record-btn:hover {
+	box-shadow: none;
+	transform: translateY(4px);
+}
+.screen-recorder-container #camera-video {
+	width: 400px;
+	height: 300px;
+	border-radius: 36px;
+	position: fixed;
+	bottom: 40px;
+	left: 40px;
+}
+@media screen and (max-width: 1440px) {
+	.screen-recorder-container #camera-video {
+		width: 200px;
+		height: 150px;
+		border-radius: 20px;
+		position: fixed;
+		bottom: 20px;
+		left: 20px;
+	}
+}
+.screen-recorder-container .wrapper #preview-video {
+	width: clamp(780px, 50vw, 944px);
+	max-height: 600px;
+	border: 1px solid #F0F1F3;
+	vertical-align: middle;
+	border-radius: 20px;
+}
+
+.screen-recorder-container .wrapper .record-recording {
+	display: none;
+	width: 80%;
+	margin: 30px auto 0;
+}
+.screen-recorder-container .wrapper .back-to-setting {
+	width: max-content;
+	padding-left: 44px;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+	color: var(--mainText);
+	background: url("./img/back.svg") left center no-repeat;
+	background-size: 30px;
+	transition: all .3s ease;
+}
+.screen-recorder-container .wrapper .back-to-setting:hover {
+	color: var(--mainColor);
+	background: url("./img/back-hover.svg") left center no-repeat;
+	background-size: 30px;
+	transform: translateY(4px);
+}
+.screen-recorder-container .wrapper .record-recording .recording-block {
+	margin-top: 16px;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .recording-left {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .recording-right {
+	margin-left: 30px;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .recording-img {
+	width: 440px;
+	height: 248px;
+	background: var(--mainText) url("./img/wave.svg") center no-repeat;
+	background-size: contain;
+	border-radius: 20px;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+	text-align: center;
+	color: var(--mainColor);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias {
+	margin-top: 20px;
+	width: 440px;
+	height: 64px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias .item-camera {
+	width: 27px;
+	height: 32px;
+	background: url("./img/camera-false.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias .item-audio {
+	width: 30px;
+	height: 26px;
+	background: url("./img/sound-false.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias .item-mic {
+	width: 21px;
+	height: 35px;
+	background: url("./img/mic-false.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias .item-camera.active {
+	background: url("./img/camera.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias .item-audio.active {
+	background: url("./img/sound.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .choosed-medias .item-mic.active {
+	background: url("./img/mic.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .wrapper .record-recording .recording-block .count-down-num {
+	font-size: 64px;
+	line-height: 42px;
+	color: var(--mainText);
+	text-align: center;
+	padding: 30px 60px;
+	background: #F0F1F3 url("./img/rec.svg") 10px 10px no-repeat;
+	background-size: 40px;
+	border: 1px solid #F0F1F3;
+	border-radius: 18px;
+	font-family: 'digital-display';
+}
+
+
+.screen-recorder-container .wrapper .record-preview {
+	display: none;
+	width: max-content;
+	margin: 30px auto 0;
+}
+.screen-recorder-container .wrapper .preivew-record-video-box {
+	text-align: center;
+	margin: 16px auto;
+	border-radius: 20px;
+	overflow: hidden;
+	position: relative;
+}
+.screen-recorder-container .wrapper .deal-video {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 40px auto;
+}
+.screen-recorder-container .wrapper .deal-video .get-record-video {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.screen-recorder-container .wrapper .record-preview .download-record-video {
+	min-width: 240px;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+	text-align: center;
+	color: #FFFFFF;
+}
+.screen-recorder-container .wrapper .record-preview .download-record-video .down-icon {
+	width: 20px;
+	height: 30px;
+	margin-right: 12px;
+	background: url("./img/download.svg") center no-repeat;
+	background-size: contain;
+}
+
+.screen-recorder-container .tip-dialog-common {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+	z-index: 2010;
+}
+.screen-recorder-container .tip-dialog-common .dialog-content-common {
+	min-width: 600px;
+	max-width: 96%;
+	padding: 56px 40px;
+	background: var(--light-blue-bg);
+	box-shadow: var(--common-box-shadow);
+	border-radius: 32px;
+}
+.screen-recorder-container .go-back-dialog .go-back-content .go-back-icon {
+	width: 44px;
+	height: 44px;
+	margin: 0 auto;
+	background: url("./img/tip-icon.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .go-back-dialog .go-back-content .go-back-title {
+	max-width: 580px;
+	margin: 20px auto 0;
+	font-weight: 400;
+	font-size: 18px;
+	color: var(--mainText);
+	text-align: center;
+	line-height: 30px;
+}
+.screen-recorder-container .go-back-dialog .go-back-content .go-back-btns {
+	width: 100%;
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.screen-recorder-container .go-back-dialog .go-back-content .go-back-btn {
+	min-width: 240px;
+	max-width: 48%;
+	padding: 0 30px;
+	white-space: nowrap;
+	font-weight: 600;
+	font-size: 22px;
+	color: #FFFFFF;
+}
+.screen-recorder-container .go-back-dialog .go-back-content .confirm-go-back {
+	box-shadow: 0px 20px 40px rgba(2, 33, 37, 0.2);
+	background: var(--mainText);
+}
+
+.screen-recorder-container .no-device-tip .no-device-content .no-device-icon	{
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+	background: url("./img/no-device.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .no-device-tip .no-device-content .no-device-title {
+	max-width: 580px;
+	margin-top: 16px;
+	text-align: center;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 25px;
+	text-align: center;
+	color: var(--mainText);
+}
+.screen-recorder-container .no-device-tip .no-device-content .sure-btn	{
+	width: 260px;
+	max-width: 90%;
+	margin: 30px auto 0;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.screen-recorder-container .get-app-dialog .get-app-content {
+	height: 460px;
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.screen-recorder-container .get-app-dialog .get-app-content .close {
+	width: 25px;
+	height: 25px;
+	background-color: rgba(2, 33, 37, .2);
+	border-radius: 50%;
+	background-image: url("./img/close.svg");
+	background-size: 10px;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 16px;
+	right: 16px;
+}
+.screen-recorder-container .get-app-dialog .get-app-content .close:hover {
+	background-color: #EF8581;
+}
+.screen-recorder-container .get-app-dialog .get-app-content .app-tip-img {
+	width: 260px;
+	height: 170px;
+	max-width: 45%;
+	position: relative;
+	background: url("./img/get-app-tip.svg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .get-app-dialog .get-app-content .app-tip-content {
+	max-width: 580px;
+	margin-top: 16px;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 25px;
+	text-align: center;
+	color: var(--mainText);
+}
+.screen-recorder-container .get-app-dialog .get-app-content #macAudioNotSupport {
+	display: none;
+}
+.screen-recorder-container .get-app-dialog .get-app-content .get-app {
+	margin-top: 30px;
+	padding: 0 70px;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+	text-align: center;
+	color: #FFFFFF;
+}
+.screen-recorder-container .get-app-dialog .get-app .get-app-icon {
+	width: 28px;
+	height: 28px;
+	margin-left: 8px;
+	background: url("./img/get-app-icon.svg") center no-repeat;
+	background-size: contain;
+}
+
+
+.screen-recorder-container .not-allowed-tip .not-allowed-content .not-allowed-title {
+	font-weight: 600;
+	max-width: 580px;
+	font-size: 20px;
+	line-height: 27px;
+	text-align: center;
+	color: var(--mainText);
+}
+.screen-recorder-container .not-allowed-tip .not-allowed-content .not-allowed-img {
+	border-radius: 23px;
+	margin-top: 23px;
+	width: 100%;
+	padding-bottom: 43.65%;
+	background: url("./img/just-chrome.png") center no-repeat;
+	background-size: contain;
+	position: relative;
+}
+.screen-recorder-container .not-allowed-tip .not-allowed-content .choose-audio-img {
+	border-radius: 23px;
+	margin-top: 23px;
+	width: 100%;
+	padding-bottom: 43.65%;
+	background: url("./img/choose-audio.png") center no-repeat;
+	background-size: contain;
+	position: relative;
+}
+.screen-recorder-container .not-allowed-tip .not-allowed-content .choose-audio-img:lang(zh) {
+	background: url("./img/choose-audio-zh.jpg") center no-repeat;
+	background-size: contain;
+}
+.screen-recorder-container .not-allowed-tip .not-allowed-content .not-allowed-img .click-here-plz {
+	width: max-content;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: center;
+	font-weight: bold;
+	color: var(--mainColor);
+	position: absolute;
+	top: 52%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.screen-recorder-container .not-allowed-tip .not-allowed-content .just-chrome {
+	color: rgba(2, 33, 37, .5);
+	margin-top: 16px;
+	font-size: 18px;
+	line-height: 25px;
+	text-align: center;
+}
+.screen-recorder-container .not-allowed-tip .not-allowed-content .for-sure {
+	width: 260px;
+	margin: 30px auto 0;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+}
+
+
+.screen-recorder-container .light-top-tip {
+	width: max-content;
+	height: 48px;
+	max-width: 70%;
+	padding: 0 50px;
+	background: var(--mainText);
+	box-shadow: 0px 10px 20px rgba(16, 104, 116, 0.2);
+	border-radius: 12px;
+	font-size: 16px;
+	line-height: 21px;
+	text-align: center;
+	color: #95F3FF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: -130px;
+	left: 50%;
+	opacity: 0;
+	transform: translateX(-50%);
+	transition: top .5s ease;
+}
+.screen-recorder-container .light-top-tip.active {
+	opacity: 1;
+	top: 30px;
+}
+.screen-recorder-container .tip-img {
+	width: 24px;
+	height: 24px;
+	background: url("./img/light-tip.svg") center no-repeat;
+	background-size: contain;
+	margin-right: 12px;
+}
+
+.count-down-dialog .count-down {
+	width: 220px;
+	height: 220px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.count-down-dialog .count-circle {
+	width: 100%;
+	height: 100%;
+	background: url("./img/count-circle.png") center no-repeat;
+	background-size: contain;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	animation: trunCircle 2s linear infinite;
+}
+.count-down-dialog .countdown-number {
+	width: 180px;
+	height: 180px;
+	font-size: 160px;
+	line-height: 180px;
+	border-radius: 50%;
+	font-family: 'digital Display';
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background: url("./img/count-bg.png") center no-repeat;
+	background-size: contain;
+	z-index: 2;
+}
+
+@keyframes trunCircle {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
